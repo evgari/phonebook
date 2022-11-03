@@ -88,8 +88,8 @@ const data = [
     thead.insertAdjacentHTML('beforeend', `
       <tr>
         <th class="delete">Удалить</th>
-        <th>Имя</th>
-        <th>Фамилия</th>
+        <th class="name">Имя</th>
+        <th class="surname">Фамилия</th>
         <th>Телефон</th>
         <th class="edit">Редактировать</th>
       </tr>
@@ -110,6 +110,7 @@ const data = [
     const form = document.createElement('form');
     form.classList.add('form');
     form.insertAdjacentHTML('beforeend', `
+      <button class="close" type="button"></button>
       <h2 class="form-title">Добавить контакт</h2>
       <div class="form-group">
         <label class="form-label" for="name">Имя:</label>
@@ -128,10 +129,6 @@ const data = [
       </div>
     `);
 
-    const close = document.createElement('button');
-    close.classList.add('close');
-    close.setAttribute('type', 'button');
-
     const btnsGroup = createBtnsGroup([
       {
         className: 'btn btn-primary mr-3',
@@ -145,7 +142,6 @@ const data = [
       },
     ]);
 
-    form.prepend(close);
     form.append(...btnsGroup.btns);
 
     overlay.append(form);
@@ -153,7 +149,6 @@ const data = [
     return {
       overlay,
       form,
-      close,
     };
   };
 
@@ -206,14 +201,15 @@ const data = [
       list: table.tbody,
       logo,
       btnAdd: btnsGroup.btns[0],
+      btnDel: btnsGroup.btns[1],
       formOverlay: form.overlay,
       form: form.form,
-      btnClose: form.close,
     };
   };
 
   const createRow = ({name: firstName, surname, phone}) => {
     const tr = document.createElement('tr');
+    tr.classList.add('contact');
 
     const tdDel = document.createElement('td');
     tdDel.classList.add('delete');
@@ -249,6 +245,7 @@ const data = [
   const renderContacts = (elem, data) => {
     const allRow = data.map(createRow);
     elem.append(...allRow);
+
     return allRow;
   };
 
@@ -270,7 +267,13 @@ const data = [
     const app = document.querySelector(selectorApp);
     const phoneBook = renderPhoneBook(app, title);
 
-    const {list, logo, btnAdd, formOverlay, form, btnClose} = phoneBook;
+    const {
+      list,
+      logo,
+      btnAdd,
+      formOverlay,
+      btnDel,
+    } = phoneBook;
 
     // Функционал
     const allRow = renderContacts(list, data);
@@ -281,16 +284,27 @@ const data = [
       formOverlay.classList.add('is-visible');
     });
 
-    btnClose.addEventListener('click', () => {
-      formOverlay.classList.remove('is-visible');
+    formOverlay.addEventListener('click', e => {
+      const target = e.target;
+
+      if (target === formOverlay ||
+          target.classList.contains('close')) {
+        formOverlay.classList.remove('is-visible');
+      }
     });
 
-    form.addEventListener('click', event => {
-      event.stopPropagation();
+    btnDel.addEventListener('click', () => {
+      document.querySelectorAll('.delete').forEach(del => {
+        del.classList.toggle('is-visible');
+      });
     });
 
-    formOverlay.addEventListener('click', () => {
-      formOverlay.classList.remove('is-visible');
+    list.addEventListener('click', e => {
+      const target = e.target;
+
+      if (target.closest('.del-icon')) {
+        target.closest('.contact').remove();
+      }
     });
   };
 
