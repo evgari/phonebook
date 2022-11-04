@@ -276,7 +276,9 @@ const data = [
     } = phoneBook;
 
     // Функционал
-    const allRow = renderContacts(list, data);
+    let allRow = renderContacts(list, data);
+    const thead = document.querySelector('thead');
+    const tbody = document.querySelector('tbody');
 
     hoverRow(allRow, logo);
 
@@ -288,7 +290,7 @@ const data = [
       const target = e.target;
 
       if (target === formOverlay ||
-          target.classList.contains('close')) {
+        target.classList.contains('close')) {
         formOverlay.classList.remove('is-visible');
       }
     });
@@ -304,6 +306,31 @@ const data = [
 
       if (target.closest('.del-icon')) {
         target.closest('.contact').remove();
+      }
+    });
+
+    thead.addEventListener('click', e => {
+      const target = e.target;
+      tbody.innerHTML = '';
+
+      if (target.classList.contains('name')) {
+        data.sort((a, b) => {
+          if (a.name > b.name) return 1;
+          if (a.name < b.name) return -1;
+          if (a.name < b.name) return 0;
+        });
+
+        allRow = renderContacts(list, data);
+      }
+
+      if (target.classList.contains('surname')) {
+        data.sort((a, b) => {
+          if (a.surname > b.surname) return 1;
+          if (a.surname < b.surname) return -1;
+          if (a.surname < b.surname) return 0;
+        });
+
+        allRow = renderContacts(list, data);
       }
     });
   };
