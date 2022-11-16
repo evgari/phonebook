@@ -1,11 +1,9 @@
 'use strict';
 
-const getStorage = () => (localStorage.getItem('phonebook') ?
-  JSON.parse(localStorage.getItem('phonebook')) : []);
+const getStorage = () => JSON.parse(localStorage.getItem('phonebook')) || [];
 
-const setStorage = data => {
+const setStorage = data =>
   localStorage.setItem('phonebook', JSON.stringify(data));
-};
 
 const addStorage = contact => {
   const data = getStorage('phonebook');
