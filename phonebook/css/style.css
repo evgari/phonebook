@@ -38,21 +38,21 @@ body {
   background-position: center;
 }
 
-.delete.is-visible {
-  width: 10px;
-  display: table-cell;
-}
-
 .edit-icon {
   display: block;
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   border: none;
   background-color: transparent;
   background-image: url("../img/edit.svg");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.delete.is-visible {
+  width: 10px;
+  display: table-cell;
 }
 
 .btn-wrapper {
@@ -75,6 +75,7 @@ body {
   transition-timing-function: ease-in-out;
   z-index: 2;
 }
+
 
 .form-title {
   margin-top: 0;
