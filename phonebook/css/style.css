@@ -125,6 +125,7 @@ body {
 }
 
 .del-icon:hover,
+.edit-icon:hover,
 .close:hover {
   opacity: 0.7;
 }
