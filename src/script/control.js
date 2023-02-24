@@ -1,9 +1,7 @@
-import {row as createRow} from './createElements.js';
-import services from './serviceStorage.js';
+import {createRow} from './createElements';
+import {setStorage, removeStorage} from './serviceStorage';
 
-const {setStorage, removeStorage} = services;
-
-const hoverRow = (allRow, logo) => {
+export const hoverRow = (allRow, logo) => {
   const text = logo.textContent;
 
   allRow.forEach(contact => {
@@ -17,7 +15,7 @@ const hoverRow = (allRow, logo) => {
   });
 };
 
-const modalControl = (btnAdd, formOverlay) => {
+export const modalControl = (btnAdd, formOverlay) => {
   const openModal = () => {
     formOverlay.classList.add('is-visible');
   };
@@ -44,7 +42,7 @@ const modalControl = (btnAdd, formOverlay) => {
   };
 };
 
-const deleteControl = (btnDel, list) => {
+export const deleteControl = (btnDel, list) => {
   btnDel.addEventListener('click', () => {
     document.querySelectorAll('.delete').forEach(del => {
       del.classList.toggle('is-visible');
@@ -64,7 +62,7 @@ const addContactPage = (contact, list) => {
   list.append(createRow(contact));
 };
 
-const formControl = (form, list, closeModal) => {
+export const formControl = (form, list, closeModal) => {
   form.addEventListener('submit', e => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -76,11 +74,4 @@ const formControl = (form, list, closeModal) => {
     form.reset();
     closeModal();
   });
-};
-
-export default {
-  hoverRow,
-  modalControl,
-  deleteControl,
-  formControl,
 };

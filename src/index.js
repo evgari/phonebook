@@ -1,8 +1,9 @@
-import {renderApp, renderData} from './modules/render.js';
-import controls from './modules/control.js';
-import {data as getStorage} from './modules/serviceStorage.js';
+import {renderPhoneBook, renderContacts} from './script/render';
+import {hoverRow, modalControl, deleteControl,
+  formControl} from './script/control';
+import {getStorage} from './script/serviceStorage';
 
-const {hoverRow, modalControl, deleteControl, formControl} = controls;
+import './scss/index.scss';
 
 {
   const init = (selectorApp, title) => {
@@ -15,10 +16,9 @@ const {hoverRow, modalControl, deleteControl, formControl} = controls;
       formOverlay,
       form,
       btnDel,
-    } = renderApp(app, title);
+    } = renderPhoneBook(app, title);
 
-    // Функционал
-    const allRow = renderData(list, data);
+    const allRow = renderContacts(list, data);
     const {closeModal} = modalControl(btnAdd, formOverlay);
 
     hoverRow(allRow, logo);
@@ -26,6 +26,6 @@ const {hoverRow, modalControl, deleteControl, formControl} = controls;
     formControl(form, list, closeModal);
   };
 
-  window.phoneBookInit = init;
+  init('#app', 'Евгений');
 }
 

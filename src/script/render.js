@@ -1,17 +1,19 @@
-import * as createElement from './createElements.js';
+import {
+  createImageLogo,
+  createHeader,
+  createLogo,
+  createMain,
+  createBtnsGroup,
+  createTable,
+  createForm,
+  createFooter,
+  createCopy,
+  createRow,
+} from './createElements';
 
-const createHeader = createElement.header;
-const createLogo = createElement.logo;
-const createMain = createElement.main;
-const createBtnsGroup = createElement.btnsGroup;
-const createTable = createElement.table;
-const createForm = createElement.form;
-const createFooter = createElement.footer;
-const createCopy = createElement.copy;
-const createRow = createElement.row;
-
-const renderPhoneBook = (app, title) => {
+export const renderPhoneBook = (app, title) => {
   const header = createHeader();
+  const imageLogo = createImageLogo();
   const logo = createLogo(title);
   const main = createMain();
   const btnsGroup = createBtnsGroup([
@@ -31,7 +33,7 @@ const renderPhoneBook = (app, title) => {
   const footer = createFooter();
   const copy = createCopy(title);
 
-  header.headerContainer.append(logo);
+  header.headerContainer.append(imageLogo, logo);
   main.mainContainer.append(btnsGroup.btnWrapper, table, overlay);
   footer.footerContainer.append(copy);
   app.append(header, main, footer);
@@ -46,12 +48,10 @@ const renderPhoneBook = (app, title) => {
   };
 };
 
-const renderContacts = (elem, data) => {
+export const renderContacts = (elem, data) => {
   const allRow = data.map(createRow);
   elem.append(...allRow);
   return allRow;
 };
 
-export const renderApp = renderPhoneBook;
-export const renderData = renderContacts;
 

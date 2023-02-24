@@ -1,10 +1,18 @@
+import image from '../img/icon.svg';
+
+export const createImageLogo = () => {
+  const img = document.createElement('img');
+  img.src = image;
+  return img;
+};
+
 const createContainer = () => {
   const container = document.createElement('div');
   container.classList.add('container');
   return container;
 };
 
-const createHeader = () => {
+export const createHeader = () => {
   const header = document.createElement('header');
   header.classList.add('header');
 
@@ -16,7 +24,7 @@ const createHeader = () => {
   return header;
 };
 
-const createLogo = title => {
+export const createLogo = title => {
   const h1 = document.createElement('h1');
   h1.classList.add('logo');
   h1.textContent = `Телефонный справочник. ${title}`;
@@ -24,7 +32,7 @@ const createLogo = title => {
   return h1;
 };
 
-const createMain = () => {
+export const createMain = () => {
   const main = document.createElement('main');
 
   const mainContainer = createContainer();
@@ -34,7 +42,7 @@ const createMain = () => {
   return main;
 };
 
-const createBtnsGroup = params => {
+export const createBtnsGroup = params => {
   const btnWrapper = document.createElement('div');
   btnWrapper.classList.add('btn-wrapper');
 
@@ -54,7 +62,7 @@ const createBtnsGroup = params => {
   };
 };
 
-const createTable = () => {
+export const createTable = () => {
   const table = document.createElement('table');
   table.classList.add('table', 'table-striped');
 
@@ -77,7 +85,7 @@ const createTable = () => {
   return table;
 };
 
-const createForm = () => {
+export const createForm = () => {
   const overlay = document.createElement('div');
   overlay.classList.add('form-overlay');
 
@@ -126,7 +134,7 @@ const createForm = () => {
   };
 };
 
-const createFooter = () => {
+export const createFooter = () => {
   const footer = document.createElement('footer');
   footer.classList.add('footer');
 
@@ -138,14 +146,14 @@ const createFooter = () => {
   return footer;
 };
 
-const createCopy = title => {
+export const createCopy = title => {
   const copy = document.createElement('div');
   copy.textContent = `Все права защищены @${title}`;
 
   return copy;
 };
 
-const createRow = ({name: firstName, surname, phone}) => {
+export const createRow = ({name: firstName, surname, phone}) => {
   const tr = document.createElement('tr');
   tr.classList.add('contact');
 
@@ -183,12 +191,3 @@ const createRow = ({name: firstName, surname, phone}) => {
   return tr;
 };
 
-export const header = createHeader;
-export const logo = createLogo;
-export const main = createMain;
-export const btnsGroup = createBtnsGroup;
-export const table = createTable;
-export const form = createForm;
-export const footer = createFooter;
-export const copy = createCopy;
-export const row = createRow;
